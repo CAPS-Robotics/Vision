@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import time
 
-def FindColor(img, color, color_range, ignored_size=500, guassian_kernel_size=(21, 21)):
+def FindColor(img, color, color_range, ignored_size=500, guassian_kernel_size=(25, 25)):
     #img = cv2.GaussianBlur(img, guassian_kernel_size, cv2.BORDER_DEFAULT)
     lower, upper = color_range[color]
     mask = cv2.inRange(img, lower, upper)
@@ -32,13 +32,16 @@ upper_red = np.array([76, 63, 255])
 lower_blue = np.array([73, 38, 0])
 upper_blue = np.array([147, 109, 54])
 
-color_range = np.array([[lower_red, upper_red], [lower_blue, upper_blue]])
+lower_reflective_green = np.array([0, 120, 0])
+upper_reflective_green = np.array([60, 255, 120])
+
+color_range = np.array([[lower_red, upper_red], [lower_blue, upper_blue], [lower_reflective_green, upper_reflective_green]])
 
 while 1:
     t = time.time()
     ret, frame = cap.read()
     
-    coords, img, maskedFrame = FindColor(frame, 1, color_range, ignored_size=750)
+    coords, img, maskedFrame = FindColor(frame, 2, color_range, ignored_size=250)
     
     cv2.putText(img, f"FPS: {int(1 / (time.time() - t))}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
     
