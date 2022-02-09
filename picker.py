@@ -8,9 +8,11 @@ def callback(x):
 
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FPS, 0)
-cap.set(10, 0.5) #Brightness
-cap.set(3, 640)
-cap.set(4, 480)
+cap.set(10, 50) #Brightness
+cap.set(14, 50) #Gain
+cap.set(11, 10)
+cap.set(3, 1080) 
+cap.set(4, 720)
 cv2.namedWindow('image')
 
 ilowH = 0
@@ -20,6 +22,7 @@ ihighS = 255
 ilowV = 0
 ihighV = 255
 ignored_size = 0
+filter_length = 0
 
 # create trackbars for color change
 cv2.createTrackbar('lowH','image',ilowH,255,callback)
@@ -32,6 +35,7 @@ cv2.createTrackbar('lowV','image',ilowV,255,callback)
 cv2.createTrackbar('highV','image',ihighV,255,callback)
 
 cv2.createTrackbar('ignored_size', 'image', ignored_size, 10000, callback)
+cv2.createTrackbar('filter_length', 'image', filter_length, 1000, callback)
 
 while 1:
     ret, frame = cap.read()
@@ -43,12 +47,13 @@ while 1:
     ilowV = cv2.getTrackbarPos('lowV', 'image')
     ihighV = cv2.getTrackbarPos('highV', 'image')
     ignored_size = cv2.getTrackbarPos('ignored_size', 'image')
+    filter_length = cv2.getTrackbarPos('filter_length', 'image')
 
     #hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # cv2.imshow('hsv', hsv)
     lower_hsv = np.array([ilowH, ilowS, ilowV])
     higher_hsv = np.array([ihighH, ihighS, ihighV])
-    coords, img, maskedFrame = vision.FindColor(frame, lower_hsv, higher_hsv, ignored_size)
+    coords, img, maskedFrame = vision.FindColor(frame, lower_hsv, higher_hsv, ignored_size, filter_length)
     #mask = cv2.inRange(hsv, lower_hsv, higher_hsv)
     #maskedFrame = cv2.bitwise_and(frame, frame, mask = mask)
     #frame = cv2.inRange(frame, lower_hsv, higher_hsv)

@@ -5,8 +5,9 @@ import cv2
 import numpy as np
 import time
 import profiler
+from networktables import NetworkTables as nt
 
-def FindColor(img, color, color_range, ignored_size=500):
+def FindColor(img, color, color_range, ignored_size=500, filter_length=1080*720):
     #img = cv2.GaussianBlur(img, guassian_kernel_size=(11, 11), cv2.BORDER_DEFAULT)
     lower, upper = color_range[color]
     mask = cv2.inRange(img, lower, upper)
@@ -16,8 +17,9 @@ def FindColor(img, color, color_range, ignored_size=500):
     for mask_contour in mask_contours:
         if cv2.contourArea(mask_contour) > ignored_size:
             x, y, w, h = cv2.boundingRect(mask_contour)
-            coords.append((w//2 + x, h//2 + y, w*h))
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 0), 3)
+            if w <= filter_length and h <= filter_length:
+                coords.append((w//2 + x, h//2 + y, w*h))
+                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 0), 3)
 
     return coords, img, mask
 
@@ -58,13 +60,17 @@ upper_red = np.array([104, 85, 225])
 lower_blue = np.array([57, 26, 0])
 upper_blue = np.array([117, 119, 40])
 
-lower_reflective_green = np.array([192, 203, 56])
-upper_reflective_green = np.array([228, 222, 143])
+lower_reflective_green = np.array([115, 182, 53])
+upper_reflective_green = np.array([229, 224, 125])
 
 color_range = np.array([[lower_red, upper_red], [lower_blue, upper_blue], [lower_reflective_green, upper_reflective_green]])
 
 #@profiler.profile
 def main():
+    nt.initialize() #robiorio adress
+    table = nt.getTable("SmartDashboard")
+    
+    
     FPS = 0
     average_coords = np.array([320, 240])
     while 1:
@@ -73,7 +79,7 @@ def main():
 
         #coords_red, img, maskedFrame_red = FindColor(frame, 0, color_range, ignored_size=1000)
         #coords_blue, img, maskedFrame_blue = FindColor(frame, 1, color_range, ignored_size=1000)
-        coords_green, img, maskedFrame_green = FindColor(frame, 2, color_range, ignored_size=10)
+        coords_green, img, maskedFrame_green = FindColor(frame, 2, color_range, ignored_size=10, filter_length=50)
         
         coords = CenterOfMass(coords_green)
         if np.sum(coords):
