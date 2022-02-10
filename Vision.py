@@ -23,6 +23,7 @@ def FindColor(img, color, color_range, ignored_size=500, filter_length=1080*720)
 
     return coords, img, mask
 
+
 def CenterOfMass(coords_green):
     L = len(coords_green)
     
@@ -31,12 +32,39 @@ def CenterOfMass(coords_green):
     
     x = np.zeros((L))
     y = np.zeros((L))
-    a = np.zeros((L))
+    ax = np.zeros((L))
     for l in range(L):
-        x[l], y[l], a[l] = coords_green[l]
-    a = a/np.sum(a)
-    x *= a
-    y *= a
+        x[l], y[l], ax[l] = coords_green[l]
+    
+    ay = ax.copy()
+    
+    std = np.std(y)
+    mean = np.sum(y) / L
+    for l in range(L):
+        try: 
+            if y[l] < mean - (0.1 * std) or y[l] > mean + (0.1 * std):
+                y = np.delete(y, l)
+                ay = np.delete(ay, l)
+                #print("Pop y")
+        except IndexError:
+            break
+                
+    std = np.std(x)
+    mean = np.sum(x) / L
+    for l in range(L):
+        try:
+            if x[l] < mean - (0.4 * std) or x[l] > mean + (0.4 * std):
+                x = np.delete(x, l)
+                ax = np.delete(ax, l)
+                #print("Pop  x")
+        except IndexError:
+            break
+            
+        
+    ax = ax/np.sum(ax)
+    ay = ay/np.sum(ay)
+    x *= ax
+    y *= ay
     x = int(np.sum(x))
     y = int(np.sum(y))
     return np.array([x, y])
@@ -72,7 +100,7 @@ def main():
     
     
     FPS = 0
-    average_coords = np.array([320, 240])
+    average_center_of_mass = np.array([320, 240])
     while 1:
         t = time.time()
         ret, frame = cap.read()
@@ -81,15 +109,25 @@ def main():
         #coords_blue, img, maskedFrame_blue = FindColor(frame, 1, color_range, ignored_size=1000)
         coords_green, img, maskedFrame_green = FindColor(frame, 2, color_range, ignored_size=10, filter_length=50)
         
-        coords = CenterOfMass(coords_green)
-        if np.sum(coords):
-            average_coords = (average_coords * 0.82) + (coords * 0.18)
-            x, y = average_coords
+        center_of_mass = CenterOfMass(coords_green)
+        if np.sum(center_of_mass):
+            average_center_of_mass = (average_center_of_mass * 0.68) + (center_of_mass * 0.32)
+            x, y = average_center_of_mass
+            
+            turn = (x - 540) / 540
+            if abs(turn) < 0.185:
+                turn = 0
+                
+            print(turn)
+            table.putNumber('turn', turn)
 
             cv2.circle(img, (int(x), int(y)), radius=7, color=(0, 0, 0), thickness=-1)
 
         FPS = (FPS * 0.99) + ((1 / (time.time() - t)) * 0.01)
         cv2.putText(img, f"FPS: {int(FPS)}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        
+        cv2.line(img, (440, 0), (440, 720), (255, 0, 0), 5)
+        cv2.line(img, (640, 0), (640, 720), (255, 0, 0), 5)
 
         #cv2.imshow('mask', maskedFrame_red+maskedFrame_blue+maskedFrame_green)
         cv2.imshow('mask', maskedFrame_green)
