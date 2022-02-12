@@ -1,6 +1,6 @@
-
 #! /usr/bin/python3
 
+import threading
 import cv2
 import numpy as np
 import time
@@ -19,7 +19,7 @@ def FindColor(img, color, color_range, ignored_size=500, filter_length=1080*720)
             x, y, w, h = cv2.boundingRect(mask_contour)
             if w <= filter_length and h <= filter_length:
                 coords.append((w//2 + x, h//2 + y, w*h))
-                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 0), 3)
+                #cv2.rectangle(img, (x, y), (x+w, y+h), (0, 0, 0), 3)
 
     return coords, img, mask
 
@@ -67,7 +67,16 @@ def CenterOfMass(coords_green):
     y *= ay
     x = int(np.sum(x))
     y = int(np.sum(y))
+    
     return np.array([x, y])
+
+cond = threading.Condition()
+notified = [False]
+def connectionListener(connected, info):
+    print(info, '; Connected=%s' % connected)
+    with cond:
+        notified[0] = True
+        cond.notify()
 
 def callback(x):
     pass
@@ -95,13 +104,25 @@ color_range = np.array([[lower_red, upper_red], [lower_blue, upper_blue], [lower
 
 #@profiler.profile
 def main():
-    nt.initialize() #robiorio adress
-    table = nt.getTable("SmartDashboard")
+    try:
+        nt.initialize(server='roboRIO-2410-FRC.local') #roborio address
+        nt.addConnectionListener(connectionListener, immediateNotify=True)
+        
+        with cond:
+            print("Waiting")
+            if not notified[0]:
+                cond.wait()
+                
+        print("Connected!")
+        
+    except KeyboardInterrupt:
+        pass
     
+    table = nt.getTable("SmartDashboard")
     
     FPS = 0
     average_center_of_mass = np.array([320, 240])
-    while 1:
+    while True:
         t = time.time()
         ret, frame = cap.read()
 
@@ -111,28 +132,25 @@ def main():
         
         center_of_mass = CenterOfMass(coords_green)
         if np.sum(center_of_mass):
-            average_center_of_mass = (average_center_of_mass * 0.68) + (center_of_mass * 0.32)
+            average_center_of_mass = (average_center_of_mass * 0.71) + (center_of_mass * 0.29) #Smoothing
             x, y = average_center_of_mass
             
             turn = (x - 540) / 540
-            if abs(turn) < 0.185:
+            if abs(turn) < 0.04625: #0.185 old
                 turn = 0
-                
-            print(turn)
+            
             table.putNumber('turn', turn)
 
-            cv2.circle(img, (int(x), int(y)), radius=7, color=(0, 0, 0), thickness=-1)
+            #cv2.circle(img, (int(x), int(y)), radius=7, color=(0, 0, 0), thickness=-1)
 
         FPS = (FPS * 0.99) + ((1 / (time.time() - t)) * 0.01)
-        cv2.putText(img, f"FPS: {int(FPS)}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
+        #cv2.putText(img, f"FPS: {int(FPS)}", (20, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
         
-        cv2.line(img, (440, 0), (440, 720), (255, 0, 0), 5)
-        cv2.line(img, (640, 0), (640, 720), (255, 0, 0), 5)
+        #cv2.line(img, (515, 0), (515, 720), (255, 0, 0), 5)
+        #cv2.line(img, (565, 0), (565, 720), (255, 0, 0), 5)
 
-        #cv2.imshow('mask', maskedFrame_red+maskedFrame_blue+maskedFrame_green)
-        cv2.imshow('mask', maskedFrame_green)
-
-        cv2.imshow('image', img)
+        #cv2.imshow('mask', maskedFrame_green)
+        #cv2.imshow('image', img)
 
         if(cv2.waitKey(1) & 0xFF == ord('q')):
             break
