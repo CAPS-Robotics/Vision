@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116809976,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T20:58:33.016Z",
+            "updatedAt": "2022-01-22T20:58:33.016Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869212410,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T20:51:07.514Z",
+            "updatedAt": "2022-01-22T20:51:07.514Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        612,
+                        511
+                    ],
+                    [
+                        696,
+                        602
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

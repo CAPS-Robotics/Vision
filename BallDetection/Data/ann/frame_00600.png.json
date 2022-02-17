@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116809970,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T20:58:09.681Z",
+            "updatedAt": "2022-01-22T20:58:09.681Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869212248,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "firebanner64",
+            "createdAt": "2022-01-22T20:40:59.138Z",
+            "updatedAt": "2022-01-22T20:40:59.138Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        858,
+                        597
+                    ],
+                    [
+                        1066,
+                        719
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
