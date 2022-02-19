@@ -1,4 +1,5 @@
 import torch
+from PIL import Image
 from Dataset import BallDataset, get_transform
 from Model import get_model_instance_segmentation
 from engine import train_one_epoch, evaluate
@@ -58,6 +59,16 @@ def main():
         evaluate(model, data_loader_test, device=device)
 
     print("That's it!")
+
+    #Eval
+    # pick one image from the test set
+    img, _ = dataset_test[0]
+    # put the model in evaluation mode
+    model.eval()
+    with torch.no_grad():
+        prediction = model([img.to(device)])
+        Image.fromarray(img.mul(255).permute(1, 2, 0).byte().numpy())
+        Image.fromarray(prediction[0]['masks'][0, 0].mul(255).byte().cpu().numpy())
 
 if __name__ == '__main__':
     main()
