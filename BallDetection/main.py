@@ -14,6 +14,8 @@ def main():
     # use our dataset and defined transformations
     dataset = BallDataset(get_transform(train=True))
     dataset_test = BallDataset(get_transform(train=False))
+    #dataset = BallDataset(transforms=None)
+    #dataset_test = BallDataset(transforms=None)
 
     # split the dataset in train and test set
     indices = torch.randperm(len(dataset)).tolist()

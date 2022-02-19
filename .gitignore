@@ -6,3 +6,4 @@ BallDetection/__pycache__/Net.cpython-39.pyc
 BallDetection/__pycache__/ParseData.cpython-39.pyc
 BallDetection/__pycache__/transforms.cpython-39.pyc
 BallDetection/__pycache__/utils.cpython-39.pyc
+BallDetection/__pycache__/coco_eval.cpython-39.pyc

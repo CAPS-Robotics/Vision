@@ -1,6 +1,7 @@
 import json
 import numpy as np
 import cv2
+from PIL import Image
 
 labels = [json.load(open("BallDetection/Data/ann/frame_" + "".join([str(0) for _ in range(5-len(str(25*i)))]) + str(25*i) + ".png.json")) for i in range(4825 // 25)]
 images_paths = ["BallDetection/Data/img/frame_" + "".join([str(0) for _ in range(5-len(str(25*i)))]) + str(25*i) + ".png" for i in range(4825 // 25)]
@@ -12,8 +13,8 @@ ball_types = []
 masks = []
 for i in range(len(images_paths)):
     try:
-        img = cv2.imread(images_paths[i])
-        img = cv2.resize(img, (1080, 720))
+        img = Image.open(images_paths[i]).convert("HSV")
+        img = img.resize((1080, 720))
 
         (x0, y0), (x1, y1) = labels[i]["objects"][0]["points"]["exterior"]
 
@@ -45,3 +46,16 @@ for i in range(len(images_paths)):
 
     except IndexError:
         print("Incomplete label")
+
+if __name__ == '__main__':
+    for i in range(len(masks)):
+        mask = masks[i]
+
+        obj_ids = np.unique(mask)
+        #obj_ids = obj_ids[1:] #Remove the background from the ids
+
+        imasks = (mask == obj_ids[:, None, None]) * 1
+
+        img = Image.fromarray(imasks)
+        img.show()
+

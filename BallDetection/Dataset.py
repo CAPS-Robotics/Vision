@@ -17,11 +17,25 @@ class BallDataset(torch.utils.data.Dataset):
         obj_ids = np.unique(mask)
         obj_ids = obj_ids[1:] #Remove the background from the ids
 
-        masks = mask != 0
+        masks = mask == obj_ids[:, None, None]
+
+        # get bounding box coordinates for each mask
+        num_objs = len(obj_ids)
+        boxes = []
+        for i in range(num_objs):
+            pos = np.where(masks[i])
+            xmin = np.min(pos[1])
+            xmax = np.max(pos[1])
+            ymin = np.min(pos[0])
+            ymax = np.max(pos[0])
+            boxes.append([xmin, ymin, xmax, ymax])
+
 
         #Convert to torch.Tensor
-        boxes = torch.as_tensor(ParseData.bounding_box_coords, dtype=torch.float32)
-        labels = torch.as_tensor(ParseData.ball_types, dtype=torch.int64)
+        #boxes = torch.as_tensor(ParseData.bounding_box_coords, dtype=torch.float32)
+        boxes = torch.as_tensor(boxes, dtype=torch.float32)
+        #labels = torch.as_tensor(ParseData.ball_types, dtype=torch.int64)
+        labels = torch.ones((num_objs,), dtype=torch.int64)
         masks = torch.as_tensor(masks, dtype=torch.uint8)
 
         image_id = torch.tensor([idx])

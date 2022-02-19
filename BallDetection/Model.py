@@ -7,7 +7,7 @@ model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
 
 # replace the classifier with a new one, that has
 # num_classes which is user-defined
-num_classes = 3  # 2 classes (blue and red ball) + background
+num_classes = 2  # 2 classes (blue and red ball) + background. Nvm, I actually have no idea.
 # get number of input features for the classifier
 in_features = model.roi_heads.box_predictor.cls_score.in_features
 # replace the pre-trained head with a new one
