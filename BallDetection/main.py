@@ -67,8 +67,13 @@ def main():
     model.eval()
     with torch.no_grad():
         prediction = model([img.to(device)])
-        Image.fromarray(img.mul(255).permute(1, 2, 0).byte().numpy())
-        Image.fromarray(prediction[0]['masks'][0, 0].mul(255).byte().cpu().numpy())
+        img = Image.fromarray(img.mul(255).permute(1, 2, 0).byte().numpy())
+        mask = Image.fromarray(prediction[0]['masks'][0, 0].mul(255).byte().cpu().numpy())
+
+        img.show()
+        mask.show()
+
+    torch.save(model.state_dict(), "model")
 
 if __name__ == '__main__':
     main()
