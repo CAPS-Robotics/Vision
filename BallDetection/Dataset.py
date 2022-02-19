@@ -7,8 +7,7 @@ import ParseData
 class BallDataset(torch.utils.data.Dataset):
     def __init__(self, transforms):
         self.transforms = transforms
-        self.imgs = ParseData.images
-        self.masks = ParseData.masks
+        self.imgs, self.masks = ParseData.get()
 
     def __getitem__(self, idx):
         img = self.imgs[idx]
