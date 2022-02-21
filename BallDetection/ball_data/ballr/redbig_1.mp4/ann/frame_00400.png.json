@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116809981,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T20:59:03.926Z",
+            "updatedAt": "2022-01-22T20:59:03.926Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869211308,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "thecodewizard",
+            "createdAt": "2022-01-22T20:14:35.030Z",
+            "updatedAt": "2022-01-22T20:14:35.030Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        815,
+                        312
+                    ],
+                    [
+                        983,
+                        477
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

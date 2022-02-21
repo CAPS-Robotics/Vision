@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869193358,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "MemoMumb",
+            "createdAt": "2022-01-22T16:55:58.212Z",
+            "updatedAt": "2022-01-22T16:55:58.212Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        511,
+                        344
+                    ],
+                    [
+                        615,
+                        454
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

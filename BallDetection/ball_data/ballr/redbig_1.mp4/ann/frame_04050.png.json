@@ -1,0 +1,58 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869211414,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T20:16:59.363Z",
+            "updatedAt": "2022-01-22T20:17:04.027Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        576,
+                        213
+                    ],
+                    [
+                        576,
+                        213
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 869211426,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T20:17:21.863Z",
+            "updatedAt": "2022-01-22T20:17:21.863Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        574,
+                        224
+                    ],
+                    [
+                        753,
+                        411
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116809988,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T20:59:23.033Z",
+            "updatedAt": "2022-01-22T20:59:23.033Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869211524,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T20:19:20.894Z",
+            "updatedAt": "2022-01-22T20:19:20.894Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        620,
+                        446
+                    ],
+                    [
+                        804,
+                        658
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

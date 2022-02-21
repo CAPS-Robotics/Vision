@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116808458,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T17:45:21.431Z",
+            "updatedAt": "2022-01-22T17:45:21.431Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869194208,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "MemoMumb",
+            "createdAt": "2022-01-22T17:11:08.839Z",
+            "updatedAt": "2022-01-22T17:11:08.839Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        771,
+                        539
+                    ],
+                    [
+                        882,
+                        683
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

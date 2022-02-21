@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869196937,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "thecodewizard",
+            "createdAt": "2022-01-22T17:23:32.925Z",
+            "updatedAt": "2022-01-22T17:23:32.925Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        415,
+                        86
+                    ],
+                    [
+                        558,
+                        230
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869211380,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "thecodewizard",
+            "createdAt": "2022-01-22T20:15:57.903Z",
+            "updatedAt": "2022-01-22T20:15:57.903Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        524,
+                        81
+                    ],
+                    [
+                        879,
+                        444
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

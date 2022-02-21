@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869197040,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T17:25:11.203Z",
+            "updatedAt": "2022-01-22T17:25:11.203Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        357,
+                        229
+                    ],
+                    [
+                        493,
+                        363
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

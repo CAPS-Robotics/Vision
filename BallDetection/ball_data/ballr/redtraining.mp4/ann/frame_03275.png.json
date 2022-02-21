@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869194112,
+            "classId": 9943758,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "Anelliator",
+            "createdAt": "2022-01-22T17:07:45.616Z",
+            "updatedAt": "2022-01-22T17:07:45.616Z",
+            "tags": [],
+            "classTitle": "redball",
+            "points": {
+                "exterior": [
+                    [
+                        791,
+                        435
+                    ],
+                    [
+                        911,
+                        553
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

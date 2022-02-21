@@ -1,0 +1,44 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 116808472,
+            "tagId": 30118054,
+            "name": "val",
+            "value": null,
+            "labelerLogin": "pittenjac",
+            "createdAt": "2022-01-22T17:46:25.054Z",
+            "updatedAt": "2022-01-22T17:46:25.054Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869196802,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "MemoMumb",
+            "createdAt": "2022-01-22T17:20:15.108Z",
+            "updatedAt": "2022-01-22T17:20:15.108Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        659,
+                        297
+                    ],
+                    [
+                        704,
+                        344
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

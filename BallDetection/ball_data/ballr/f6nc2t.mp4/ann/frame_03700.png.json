@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869196791,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "MemoMumb",
+            "createdAt": "2022-01-22T17:19:57.299Z",
+            "updatedAt": "2022-01-22T17:19:57.299Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        621,
+                        320
+                    ],
+                    [
+                        662,
+                        362
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

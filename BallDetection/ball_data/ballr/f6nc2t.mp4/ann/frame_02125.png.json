@@ -1,0 +1,34 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 720,
+        "width": 1280
+    },
+    "objects": [
+        {
+            "id": 869196944,
+            "classId": 9943772,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "firebanner64",
+            "createdAt": "2022-01-22T17:23:40.451Z",
+            "updatedAt": "2022-01-22T17:23:40.451Z",
+            "tags": [],
+            "classTitle": "blueball",
+            "points": {
+                "exterior": [
+                    [
+                        520,
+                        275
+                    ],
+                    [
+                        662,
+                        417
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
