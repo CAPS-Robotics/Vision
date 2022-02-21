@@ -58,7 +58,7 @@ def get():
                 bounding_box_coords.append([x0, y0, x1, y1])
                 bounding_box_areas.append(abs((x1-x0)*(y1-y0)))
                 ball_types.append(ball_type)
-                masks.append(mask)
+                masks.append(mask) #Remove the background from the ids
 
                 #cv2.imshow("Image", img)
                 #cv2.waitKey(0)
@@ -66,6 +66,7 @@ def get():
             except IndexError:
                 print("Incomplete label")
     
-    return images, masks
+    return images, masks, ball_types
 
-
+if __name__ == '__main__':
+    get()

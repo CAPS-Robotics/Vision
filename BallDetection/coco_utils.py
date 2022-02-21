@@ -180,7 +180,7 @@ def convert_to_coco_api(ds):
             ann['category_id'] = labels[i]
             categories.add(labels[i])
             ann['area'] = areas[i]
-            ann['iscrowd'] = iscrowd[i]
+            ann['iscrowd'] = 0 #iscrowd[i]
             ann['id'] = ann_id
             if 'masks' in targets:
                 ann["segmentation"] = coco_mask.encode(masks[i].numpy())

@@ -8,10 +8,12 @@ import utils
 
 def main():
     # train on the GPU or on the CPU, if a GPU is not available
-    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    device = torch.device('cpu')
+    print(f"Using {device}")
 
     # our dataset has two classes only - background and person
-    num_classes = 2
+    num_classes = 3
     # use our dataset and defined transformations
     dataset = BallDataset(get_transform(train=True))
     dataset_test = BallDataset(get_transform(train=False))

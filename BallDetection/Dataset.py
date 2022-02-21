@@ -7,11 +7,12 @@ import ParseData
 class BallDataset(torch.utils.data.Dataset):
     def __init__(self, transforms):
         self.transforms = transforms
-        self.imgs, self.masks = ParseData.get()
+        self.imgs, self.masks, self.labels = ParseData.get()
 
     def __getitem__(self, idx):
         img = self.imgs[idx]
-        mask = self.masks[idx]
+        mask = np.array(self.masks[idx])
+        label = self.labels[idx]
 
         obj_ids = np.unique(mask)
         obj_ids = obj_ids[1:] #Remove the background from the ids
@@ -27,21 +28,28 @@ class BallDataset(torch.utils.data.Dataset):
             xmax = np.max(pos[1])
             ymin = np.min(pos[0])
             ymax = np.max(pos[0])
+            if xmin == xmax:
+                xmax += 1
+            if ymin == ymax:
+                ymax += 1
             boxes.append([xmin, ymin, xmax, ymax])
-
+        
+        if boxes == []:
+            boxes.append([0, 0, 1, 1])
 
         #Convert to torch.Tensor
         #boxes = torch.as_tensor(ParseData.bounding_box_coords, dtype=torch.float32)
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
         #labels = torch.as_tensor(ParseData.ball_types, dtype=torch.int64)
-        labels = torch.ones((num_objs,), dtype=torch.int64)
+        labels = torch.as_tensor((label,), dtype=torch.int64)
         masks = torch.as_tensor(masks, dtype=torch.uint8)
 
         image_id = torch.tensor([idx])
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+        
 
         #Idk what this is
-        iscrowd = torch.zeros((2,), dtype=torch.int64)
+        iscrowd = torch.zeros((num_objs,), dtype=torch.int64)
 
         target = {}
         target["boxes"] = boxes
