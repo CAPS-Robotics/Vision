@@ -33,9 +33,6 @@ class BallDataset(torch.utils.data.Dataset):
             if ymin == ymax:
                 ymax += 1
             boxes.append([xmin, ymin, xmax, ymax])
-        
-        if boxes == []:
-            boxes.append([0, 0, 1, 1])
 
         #Convert to torch.Tensor
         #boxes = torch.as_tensor(ParseData.bounding_box_coords, dtype=torch.float32)
