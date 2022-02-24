@@ -52,6 +52,10 @@ def get():
                 #Create image mask using bounding box
                 mask = np.zeros((720, 1080))
                 mask[y0:y1, x0:x1] = 1
+
+                if np.sum(mask) <= 1:
+                    raise IndexError
+
                 mask *= ball_type #Make mask numbers match ball_type 
 
                 images.append(img)

@@ -8,8 +8,8 @@ import utils
 
 def main():
     # train on the GPU or on the CPU, if a GPU is not available
-    #device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
-    device = torch.device('cpu')
+    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    #device = torch.device('cpu')
     print(f"Using {device}")
 
     # our dataset has two classes only - background and person
@@ -37,6 +37,9 @@ def main():
     # get the model using our helper function
     model = get_model_instance_segmentation(num_classes)
 
+    #Load model
+    model.load_state_dict(torch.load("model"))
+
     # move model to the right device
     model.to(device)
 
@@ -50,7 +53,7 @@ def main():
                                                    gamma=0.1)
 
     # let's train it for 10 epochs
-    num_epochs = 10
+    num_epochs = 5
 
     for epoch in range(num_epochs):
         # train for one epoch, printing every 10 iterations
@@ -58,7 +61,7 @@ def main():
         # update the learning rate
         lr_scheduler.step()
         # evaluate on the test dataset
-        evaluate(model, data_loader_test, device=device)
+        #evaluate(model, data_loader_test, device=device)
 
     print("That's it!")
 
