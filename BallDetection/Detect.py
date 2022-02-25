@@ -16,9 +16,10 @@ model.to(device)
 #Switch to eval mode
 model.eval()
 
-def Detect():
+def Detect(img):
     with torch.no_grad():
-        prediction = model([img.to(device)])
+        rgb_img = Image.fromarray(img, 'RGB')
+        prediction = model([rgb_img.to(device)])
         img = Image.fromarray(img.mul(255).permute(1, 2, 0).byte().numpy())
         boxes = prediction[0]['boxes'][0].byte().cpu().numpy()
         labels = prediction[0]['labels'][0].byte().cpu().numpy()
