@@ -105,7 +105,7 @@ color_range = np.array([[lower_red, upper_red], [lower_blue, upper_blue], [lower
 #@profiler.profile
 def main():
     try:
-        nt.initialize(server='roboRIO-2410-FRC.local') #roborio address
+        nt.initialize(server='roborio-2410-frc.local') #roborio address
         nt.addConnectionListener(connectionListener, immediateNotify=True)
         
         with cond:
@@ -122,6 +122,12 @@ def main():
     
     FPS = 0
     average_center_of_mass = np.array([320, 240])
+    
+    #constants for distance calculation
+    theta = 3
+    hoop_height = 1
+    camera_height = 1
+    k = 2
     while True:
         t = time.time()
         ret, frame = cap.read()
@@ -139,7 +145,10 @@ def main():
             if abs(turn) < 0.04625: #0.185 old
                 turn = 0
             
+            print(turn)
             table.putNumber('turn', turn)
+            
+            table.putBoolean('distance', y > k)
 
             #cv2.circle(img, (int(x), int(y)), radius=7, color=(0, 0, 0), thickness=-1)
 
@@ -149,8 +158,8 @@ def main():
         #cv2.line(img, (515, 0), (515, 720), (255, 0, 0), 5)
         #cv2.line(img, (565, 0), (565, 720), (255, 0, 0), 5)
 
-        #cv2.imshow('mask', maskedFrame_green)
-        #cv2.imshow('image', img)
+        cv2.imshow('mask', maskedFrame_green)
+        cv2.imshow('image', img)
 
         if(cv2.waitKey(1) & 0xFF == ord('q')):
             break
