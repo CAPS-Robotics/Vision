@@ -1,4 +1,5 @@
 import torch
+import cv2
 from PIL import Image
 from .Model import get_model_instance_segmentation
 
@@ -20,7 +21,8 @@ def Detect(img):
     print(img.shape)
     with torch.no_grad():
         #rgb_img = Image.fromarray(img, 'RGB')
-        rgb_img = torch.as_tensor(img.transpose(2, 0, 1)/255, dtype=torch.float32)
+        rgbimg = cv2.cvtColor(img, cv2.COLOR_HSV2RGB).transpose(2, 0, 1)/255
+        rgb_img = torch.as_tensor(rgbimg, dtype=torch.float32)
         prediction = model([rgb_img.to(device)])
         img = Image.fromarray(img.mul(255).permute(1, 2, 0).byte().numpy())
         boxes = prediction[0]['boxes'][0].byte().cpu().numpy()
